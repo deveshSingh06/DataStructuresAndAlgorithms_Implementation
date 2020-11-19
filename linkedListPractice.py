@@ -5,18 +5,27 @@ class Node:
 
 
 class LinkedList:
+
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def insert(self, data):
-        node = Node(data, self.head)
-        self.head = node
+        if self.head == None:
+            node = Node(data, None)
+            self.head = node
+            self.tail = node
+        else:
+            node = Node(data, None)
+            self.tail.next = node
+            self.tail = node
 
-    def tail(self):
-        itr = self.head
-        while itr.next:
-            itr = itr.next
-        print(itr.data)
+
+    # def tail(self):
+    #     itr = self.head
+    #     while itr.next:
+    #         itr = itr.next
+    #     print(itr.data)
 
     def getlen(self):
         count = 0
@@ -61,8 +70,8 @@ ll.traverse()
 
 print(ll.getlen())
 
-ll.delete(1)
+# ll.delete(1)
 
 ll.traverse()
 
-ll.tail()
+# ll.tail()
