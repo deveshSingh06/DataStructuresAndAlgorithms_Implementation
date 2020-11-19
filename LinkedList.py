@@ -1,102 +1,81 @@
 class Node:
-    def __init__(self, data, next):
+    def __init__(self, data=None, next=None):
         self.data = data
         self.next = next
 
+
 class LinkedList:
+
     def __init__(self):
         self.head = None
+        self.tail = None
 
-    def insert_at_begining(self, data):
-        node = Node(data, self.head)
-        self.head =node
+    def insert(self, data):
+        if self.head == None:
+            node = Node(data, None)
+            self.head = node
+            self.tail = node
+        else:
+            node = Node(data, None)
+            self.tail.next = node
+            self.tail = node
 
-    def insert_at_end(self, data):
-        if self.head is None:
-            self.head = Node(data, None)
-            return
-
+    def insertat(self, loc, data):
+        node = Node(data, None)
         itr = self.head
-
-        while itr.next:
+        count = 0
+        while itr:
+            if count == loc-1:
+                node.next = itr.next
+                itr.next = node
+                break
             itr = itr.next
+            count+=1
 
-        itr.next = Node(data, None)
+    def getlen(self):
+        count = 0
+        itr = self.head
+        while itr:
+            itr = itr.next
+            count+=1
+        return count
 
-    def insertData(self, dataList):
-        self.head = None
-        for data in dataList:
-            self.insert_at_end(data)
+    def delete(self, loc):
+        if loc<0 and loc>self.getlen():
+            raise Exception("Invalid Index")
+        if loc == 0:
+            self.head = self.head.next
 
-    def print(self):
-        if self.head is None:
-            print("Linked list is empty")
-            return
+        count = 0
+        itr = self.head
+        while itr:
+            if count == loc-1:
+                itr.next = itr.next.next
+                break
+            itr = itr.next
+            count+=1
+
+    def traverse(self):
         itr = self.head
         llstr = ''
         while itr:
-            llstr += str(itr.data) + ' --> ' if itr.next else str(itr.data)
+            llstr +=str(itr.data) + '-->' if itr.next else str(itr.data)
             itr = itr.next
         print(llstr)
 
-    def get_length(self):
-        count = 0
-        itr = self.head
-        while itr:
-            count+=1
-            itr = itr.next
 
-        return count
+ll = LinkedList()
 
-    def insert_at(self, index, data):
-        if index<0 or index>self.get_length():
-            raise Exception("Invalid Index")
+ll.insert(25)
+ll.insert(235)
+ll.insert(55)
+ll.insert(35)
 
-        if index==0:
-            self.insert_at_begining(data)
-            return
-
-        count = 0
-        itr = self.head
-        while itr:
-            if count == index - 1:
-                node = Node(data, itr.next)
-                itr.next = node
-                break
-
-            itr = itr.next
-            count += 1
-
-    def remove_at(self, index):
-        if index<0 or index>=self.get_length():
-            raise Exception("Invalid Index")
-
-        if index==0:
-            self.head = self.head.next
-            return
-
-        count = 0
-        itr = self.head
-        while itr:
-            if count == index - 1:
-                itr.next = itr.next.next
-                break
-
-            itr = itr.next
-            count+=1
-
-
-if __name__ == '__main__':
-    ll = LinkedList()
-    ll.insertData([45,7,12,567,99])
-    ll.print()
-    ll.insert_at(1,67)
-    ll.print()
-    ll.insert_at_end(86)
-    ll.print()
-    ll.remove_at(2)
-    ll.print()
-
-    # ll.insertData([])
-    # #
-    # ll.print()
+ll.traverse()
+print(ll.getlen())
+ll.insertat(2, 68)
+ll.traverse()
+ll.delete(1)
+print(ll.tail.data)
+ll.traverse()
+print(ll.getlen())
