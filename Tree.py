@@ -29,7 +29,11 @@ def build_product_tree():
     root = TreeNode("Electronics")
 
     laptop = TreeNode("Laptop")
-    laptop.add_child(TreeNode("Mac"))
+    mac = TreeNode("Mac")
+    mac.add_child(TreeNode("MacBook 2018"))
+    mac.add_child(TreeNode("MacBook Air 2019"))
+    mac.add_child(TreeNode("MacBook X Pro 2020"))
+    laptop.add_child(mac)
     laptop.add_child(TreeNode("Surface"))
     laptop.add_child(TreeNode("Thinkpad"))
 
@@ -45,6 +49,8 @@ def build_product_tree():
     root.add_child(laptop)
     root.add_child(cellphone)
     root.add_child(tv)
+
+
 
     root.print_tree()
 
