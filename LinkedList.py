@@ -25,23 +25,23 @@ class LinkedList:
         itr = self.head
         count = 0
         while itr:
-            if count == loc-1:
+            if count == loc - 1:
                 node.next = itr.next
                 itr.next = node
                 break
             itr = itr.next
-            count+=1
+            count += 1
 
     def getlen(self):
         count = 0
         itr = self.head
         while itr:
             itr = itr.next
-            count+=1
+            count += 1
         return count
 
     def delete(self, loc):
-        if loc<0 and loc>self.getlen():
+        if 0 > loc > self.getlen():
             raise Exception("Invalid Index")
         if loc == 0:
             self.head = self.head.next
@@ -49,17 +49,17 @@ class LinkedList:
         count = 0
         itr = self.head
         while itr:
-            if count == loc-1:
+            if count == loc - 1:
                 itr.next = itr.next.next
                 break
             itr = itr.next
-            count+=1
+            count += 1
 
     def traverse(self):
         itr = self.head
         llstr = ''
         while itr:
-            llstr +=str(itr.data) + '-->' if itr.next else str(itr.data)
+            llstr += str(itr.data) + '-->' if itr.next else str(itr.data)
             itr = itr.next
         print(llstr)
 
