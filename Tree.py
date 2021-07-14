@@ -10,7 +10,6 @@ class TreeNode:
         while p:
             level += 1
             p = p.parent
-
         return level
 
     def print_tree(self):
